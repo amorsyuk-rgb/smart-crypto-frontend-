@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Crypto Advisor — Netlify Frontend</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Smart Crypto Advisor — frontend for Netlify. Connects to backend API for live data."/>
+</head>
+<body>
+  <header>
+    <h1>Smart Crypto Advisor</h1>
+    <p id="subtitle">Editable symbols + real-time charts (Chart.js) — backend: configurable</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <label>Backend URL:</label>
+      <input id="backendUrl" placeholder="https://your-backend.onrender.com" />
+      <button id="saveBackend">Save</button>
+    </section>
+
+    <section class="symbols card">
+      <h2>Symbol List (editable)</h2>
+      <div class="add-row">
+        <input id="newSymbol" placeholder="e.g. HOLOUSDT" />
+        <button id="addSymbolBtn">Add</button>
+      </div>
+      <ul id="symbolList"></ul>
+    </section>
+
+    <section class="chart card">
+      <h2>Selected Symbol</h2>
+      <div class="selector-row">
+        <select id="symbolSelect"></select>
+        <select id="intervalSelect">
+          <option>1m</option><option>3m</option><option>5m</option><option>15m</option><option>1h</option><option>4h</option><option>1d</option>
+        </select>
+        <button id="analyzeBtn">Analyze</button>
+      </div>
+
+      <div id="priceInfo" class="pill">Price: <span id="price">—</span></div>
+      <canvas id="priceChart" height="320"></canvas>
+      <div id="forecastSummary" class="card small">Forecast summary will appear here.</div>
+    </section>
+
+    <section class="portfolio card">
+      <h2>Portfolio (local)</h2>
+      <div class="add-row">
+        <input id="assetSym" placeholder="Symbol e.g. HOLOUSDT"/>
+        <input id="assetQty" placeholder="Qty" />
+        <input id="assetCost" placeholder="Avg cost (USDT)"/>
+        <button id="addAssetBtn">Add</button>
+      </div>
+      <table id="portfolioTable"><thead><tr><th>Asset</th><th>Qty</th><th>Cost</th><th>Cur</th><th>P/L</th></tr></thead><tbody></tbody></table>
+    </section>
+
+  </main>
+
+  <footer>
+    <small>Use this frontend on Netlify. Configure backend URL (Render) above. Optional OpenAI analytics can be enabled on backend via OPENAI_API_KEY.</small>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
