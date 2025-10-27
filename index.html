@@ -1,39 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Crypto Advisor v3</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://s3.tradingview.com/tv.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Crypto Advisor v4 Pro</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
-  <header>
-    <h1>Smart Crypto Advisor <span>v3</span></h1>
-    <select id="symbolSelect"></select>
-    <button id="refreshBtn">⟳</button>
+<body class="bg-gray-900 text-gray-100">
+  <header class="flex items-center justify-between p-3 border-b border-gray-800">
+    <div class="flex items-center gap-4">
+      <h1 class="text-yellow-400 font-semibold">Smart Crypto Advisor</h1>
+      <div id="marketOverview" class="flex gap-3"></div>
+    </div>
+    <div class="flex items-center gap-3">
+      <select id="langSelect" class="bg-gray-800 p-2 rounded"></select>
+      <button id="settingsBtn" class="bg-gray-800 p-2 rounded">⚙️</button>
+      <button id="refreshBtn" class="bg-yellow-500 text-black px-3 py-2 rounded">Refresh</button>
+    </div>
   </header>
 
-  <main>
-    <section class="chart-section">
-      <div id="tradingview_chart" class="chart-container"></div>
+  <main class="flex flex-1 h-[calc(100vh-64px)]">
+    <section class="flex-1 p-2">
+      <div id="tradingview_chart" class="w-full h-full bg-black rounded"></div>
+      <div class="mt-2 grid grid-cols-2 gap-2">
+        <canvas id="miniRsi" class="bg-gray-800 rounded"></canvas>
+        <canvas id="miniMacd" class="bg-gray-800 rounded"></canvas>
+      </div>
     </section>
 
-    <aside class="ai-panel">
-      <h2>AI Market Insight 🤖</h2>
-      <div id="aiSentiment">Sentiment: <span>-</span></div>
-      <div id="aiRecommendation">Recommendation: <span>-</span></div>
-      <div id="aiIndicators">RSI: - | EMA: - | MACD: -</div>
-      <p id="aiSummary">Waiting for analysis...</p>
-      <div class="index-bar"><div class="index-fill" id="valueIndex"></div></div>
+    <aside id="aiPanel" class="w-96 bg-gray-800 p-4 border-l border-gray-700 hidden md:block">
+      <div class="flex items-center justify-between">
+        <h2 class="text-yellow-400 font-semibold">AI Insights</h2>
+        <div id="confidenceBadge" class="text-sm px-2 py-1 rounded">Conf: --%</div>
+      </div>
+      <div id="sentimentGauge" class="my-3"></div>
+      <div id="aiSections" class="space-y-3">
+        <div class="p-3 bg-gray-900 rounded">
+          <h3 class="font-medium">Market Sentiment</h3>
+          <div id="aiSentiment" class="mt-1 text-sm">-</div>
+        </div>
+        <div class="p-3 bg-gray-900 rounded">
+          <h3 class="font-medium">Technical Bias</h3>
+          <div id="aiTechnical" class="mt-1 text-sm">-</div>
+        </div>
+        <div class="p-3 bg-gray-900 rounded">
+          <h3 class="font-medium">Fair Value Zone</h3>
+          <div id="aiFair" class="mt-1 text-sm">-</div>
+        </div>
+        <div class="p-3 bg-gray-900 rounded">
+          <h3 class="font-medium">Buy / Sell Zones</h3>
+          <div id="aiZones" class="mt-1 text-sm">-</div>
+        </div>
+        <div class="p-3 bg-gray-900 rounded">
+          <h3 class="font-medium">Risk Level</h3>
+          <div id="aiRisk" class="mt-1 text-sm">-</div>
+        </div>
+      </div>
     </aside>
   </main>
 
-  <footer>
-    <p>Powered by Smart Crypto Backend & TradingView</p>
-  </footer>
+  <div id="settingsDrawer" class="fixed right-0 top-0 h-full w-96 bg-gray-900 border-l border-gray-700 transform translate-x-full transition-transform">
+    <div class="p-4">
+      <h3 class="text-yellow-400 font-semibold">Settings</h3>
+      <label class="block mt-3 text-sm">Backend API Endpoint</label>
+      <input id="apiEndpoint" class="w-full mt-1 p-2 bg-gray-800 rounded" placeholder="https://smart-crypto-backend.onrender.com" />
+      <button id="saveEndpoint" class="mt-3 bg-yellow-500 text-black px-3 py-2 rounded">Save & Reload</button>
 
-  <script src="config.js"></script>
+      <hr class="my-4 border-gray-700"/>
+
+      <label class="block text-sm">Favorites (comma-separated)</label>
+      <input id="favInput" class="w-full mt-1 p-2 bg-gray-800 rounded" placeholder="BTCUSDT,ETHUSDT" />
+      <button id="saveFavs" class="mt-3 bg-gray-700 px-3 py-2 rounded">Save Favorites</button>
+    </div>
+  </div>
+
+  <footer class="p-2 text-xs text-gray-500 text-center">Deployed with Smart Crypto Advisor v4 Pro</footer>
+
+  <script src="https://s3.tradingview.com/tv.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

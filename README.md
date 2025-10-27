@@ -1,20 +1,13 @@
-Smart Crypto Advisor — Frontend (Netlify)
-
-This package is a GitHub-ready frontend for the Smart Crypto Advisor. It expects a Render backend (configured in config.js) but also works with CoinGecko fallback for data.
+Smart Crypto Advisor v4 Pro — Frontend (README)
 
 Files:
-- index.html — main UI
-- app.js — frontend logic (Chart.js, AI analysis, CoinGecko fallback)
-- style.css — styling
-- config.js — backend URL configuration (edit this before deploy)
-- README.md — this file
+- index.html
+- style.css
+- app.js
 
-Deploy to Netlify:
-1. Create a new GitHub repo and upload these files (or use Working Copy on iPhone).
-2. In Netlify, create a new site from Git and select this repo.
-3. Edit config.js to point BACKEND_BASE to your Render backend (default already set).
-4. Deploy. Open site and use UI. The site will use backend for klines/predict when available, otherwise CoinGecko fallback.
-
-Notes:
-- TradingView widget integration is included as a toggle (requires internet, no API key for basic widget embedding).
-- AI commentary uses client-side heuristics. To enable server-side OpenAI commentary, set OPENAI_API_KEY in your Render backend and use /api/predict endpoint.
+How to deploy:
+1. Upload these files to a GitHub repo (or directly to Render/Netlify).
+2. If using Netlify: create site from Git, publish directory = root ('.').
+3. In Settings (⚙) inside the app you can change the Backend API Endpoint and save it (stored in localStorage).
+4. Default backend is https://smart-crypto-backend.onrender.com — change if you deployed elsewhere.
+5. Add your OpenAI key in the backend environment variables on Render (OPENAI_API_KEY) for richer AI (optional).
