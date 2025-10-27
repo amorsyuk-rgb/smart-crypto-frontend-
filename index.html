@@ -1,85 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Smart Crypto Advisor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Crypto Advisor v3</title>
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Smart Crypto Advisor — Netlify frontend connected to Render backend."/>
+  <script src="https://s3.tradingview.com/tv.js"></script>
 </head>
 <body>
   <header>
-    <h1>Smart Crypto Advisor</h1>
-    <p id="subtitle">AI financial analysis • Editable symbols • Chart.js & TradingView • Mobile-ready</p>
+    <h1>Smart Crypto Advisor <span>v3</span></h1>
+    <select id="symbolSelect"></select>
+    <button id="refreshBtn">⟳</button>
   </header>
 
   <main>
-    <aside class="sidebar card">
-      <section class="controls">
-        <label>Backend URL (auto from config)</label>
-        <input id="backendUrl" disabled />
-        <div id="status" class="small">Status: idle</div>
-      </section>
-
-      <section class="symbols card">
-        <h3>Symbols</h3>
-        <div class="add-row">
-          <input id="newSymbol" placeholder="e.g. HOLOUSDT" />
-          <button id="addSymbolBtn">Add</button>
-        </div>
-        <ul id="symbolList"></ul>
-      </section>
-
-      <section class="portfolio card">
-        <h3>Portfolio</h3>
-        <div class="add-row">
-          <input id="assetSym" placeholder="Symbol e.g. HOLOUSDT"/>
-          <input id="assetQty" placeholder="Qty" />
-          <input id="assetCost" placeholder="Avg cost (USDT)"/>
-          <button id="addAssetBtn">Add</button>
-        </div>
-        <table id="portfolioTable"><thead><tr><th>Asset</th><th>Qty</th><th>Cost</th><th>Cur</th><th>P/L</th></tr></thead><tbody></tbody></table>
-      </section>
-
-      <section class="settings card">
-        <h3>Charts</h3>
-        <button id="chartJsBtn">Chart.js</button>
-        <button id="tvBtn">TradingView</button>
-      </section>
-    </aside>
-
-    <section class="maincard card">
-      <div class="selector-row">
-        <select id="symbolSelect"></select>
-        <select id="intervalSelect"><option>1m</option><option>5m</option><option>15m</option><option>1h</option><option>1d</option></select>
-        <button id="analyzeBtn">Analyze</button>
-      </div>
-
-      <div class="toprow">
-        <div class="pill">Price: <span id="price">—</span></div>
-        <div class="pill">Liquidity: <span id="liq">—</span></div>
-        <div class="pill">Recommendation: <span id="recommend">—</span></div>
-      </div>
-
-      <div id="chartjs-container">
-        <canvas id="priceChart" height="360"></canvas>
-      </div>
-      <div id="tradingview-container" style="display:none;">
-        <!-- TradingView widget will be injected here -->
-        <div id="tradingview-widget"></div>
-      </div>
-
-      <div id="forecastSummary" class="card small">Forecast summary will appear here.</div>
-      <div id="aiAnalysis" class="card small">AI Analysis will appear here.</div>
+    <section class="chart-section">
+      <div id="tradingview_chart" class="chart-container"></div>
     </section>
+
+    <aside class="ai-panel">
+      <h2>AI Market Insight 🤖</h2>
+      <div id="aiSentiment">Sentiment: <span>-</span></div>
+      <div id="aiRecommendation">Recommendation: <span>-</span></div>
+      <div id="aiIndicators">RSI: - | EMA: - | MACD: -</div>
+      <p id="aiSummary">Waiting for analysis...</p>
+      <div class="index-bar"><div class="index-fill" id="valueIndex"></div></div>
+    </aside>
   </main>
 
   <footer>
-    <small>Configure backend URL in config.js. Deploy to Netlify and point to your Render backend.</small>
+    <p>Powered by Smart Crypto Backend & TradingView</p>
   </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="config.js"></script>
-<script src="app.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
