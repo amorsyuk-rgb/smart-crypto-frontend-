@@ -1,0 +1,1 @@
+window.APP_CONFIG = { BACKEND_BASE: "https://smart-crypto-backend.onrender.com" };

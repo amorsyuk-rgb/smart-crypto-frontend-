@@ -1,12 +1,20 @@
 Smart Crypto Advisor — Frontend (Netlify)
 
-How to deploy to Netlify:
-1. Edit `app.js` and set your backend URL or save it in the UI when the site is opened.
-2. Push the `frontend_netlify` folder to GitHub.
-3. In Netlify, create a new site from GitHub and point it to this repository/folder.
-4. Publish — the site will be live at https://your-site.netlify.app
+This package is a GitHub-ready frontend for the Smart Crypto Advisor. It expects a Render backend (configured in config.js) but also works with CoinGecko fallback for data.
+
+Files:
+- index.html — main UI
+- app.js — frontend logic (Chart.js, AI analysis, CoinGecko fallback)
+- style.css — styling
+- config.js — backend URL configuration (edit this before deploy)
+- README.md — this file
+
+Deploy to Netlify:
+1. Create a new GitHub repo and upload these files (or use Working Copy on iPhone).
+2. In Netlify, create a new site from Git and select this repo.
+3. Edit config.js to point BACKEND_BASE to your Render backend (default already set).
+4. Deploy. Open site and use UI. The site will use backend for klines/predict when available, otherwise CoinGecko fallback.
 
 Notes:
-- If you don't configure a backend, the frontend will try Binance REST directly (may face CORS). Use backend for reliable operation.
-- `netlify.toml` includes a placeholder rewrite to proxy /api/* to your backend — update the URL.
-- Optional: enable Netlify Identity and redirects for authentication.
+- TradingView widget integration is included as a toggle (requires internet, no API key for basic widget embedding).
+- AI commentary uses client-side heuristics. To enable server-side OpenAI commentary, set OPENAI_API_KEY in your Render backend and use /api/predict endpoint.
